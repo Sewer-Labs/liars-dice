@@ -159,5 +159,13 @@ def validate_bid(
         if face > 6:
             logging.info('Liar was called on first bid')
             return False
+    else:
+        if quantity < prior_quantity:
+            logging.info('Quantity decreased')
+            return False
+        elif quantity == prior_quantity:
+            if face <= prior_face:
+                logging.info('Quantity stayed the same and face did not increase.')
+                return False
 
     return True
